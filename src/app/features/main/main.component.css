@@ -14,7 +14,6 @@
 
 .card {
   transition: all 0.3s ease;
-  cursor: pointer;
 }
 
 .card:hover {
@@ -24,4 +23,109 @@
   transform: translateY(-3px);
   /* border: 1px solid #e9ecef !important; */
   /* box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.12) !important; */
+}
+
+.custom-edit, .custom-delete {
+  background-color: white;
+  border: 1px solid #ced4da; /* Borde gris medio */
+  color: #495057; /* Gris oscuro */
+  transition: all 0.3s ease;
+}
+  
+  /* Botón Edit - Hover */
+  .custom-edit:hover {
+    background-color: #0d6efd; /* Azul primary de Bootstrap */
+    border-color: #0d6efd;
+    color: white;
+  }
+    
+  /* Botón Delete - Hover */
+  .custom-delete:hover {
+    background-color: #dc3545; /* Rojo danger de Bootstrap */
+    border-color: #dc3545;
+    color: white;
+  }
+
+  /* Estado normal */
+.filter-chip {
+  background-color: white;
+  border: 1px solid #dee2e6;
+  color: #6c757d;
+  transition: all 0.2s ease;
+}
+
+.filter-chip:hover {
+  background-color: #f8f9fa;
+  border-color: #0d6efd;
+  color: #0d6efd;
+}
+
+/* Estado activo/seleccionado */
+.filter-chip.active {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: white;
+}
+
+.title-truncate {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Máximo 2 líneas */
+  -webkit-box-orient: vertical;
+  line-height: 1.3;
+  min-height: 2.6em; /* Mantiene espacio consistente: 1.3 * 2 líneas */
+  color: #1b263b;
+}
+
+/* Abstract: 3 líneas en desktop, 2 en móvil */
+.card-text {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+@media (max-width: 575.98px) {
+  .card-text {
+    -webkit-line-clamp: 2;
+  }
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #0d1b2a, #1b263b); /* azul muy oscuro -> azul marino */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+.toast-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  min-width: 300px;
+  border-radius: 10px;
+}
+
+.toast-error {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  min-width: 300px;
+  border-radius: 10px;
+}
+
+.toast-success i,
+.toast-error i {
+  color: white;
+}
+
+.toast-success .toast-body,
+.toast-error .toast-body {
+  color: white;
+  padding: 0;
 }

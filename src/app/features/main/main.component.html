@@ -1,46 +1,149 @@
-<div class="container my-4">
-    <!-- Contenido principal alineado a la izquierda -->
-    <div class="w-100 text-start mb-4">
-        <h1 class="text-dark">Welcome back, Alex</h1>
-        <p class="text-secondary">Browse headlines, refine by category, or search something specific.</p>
+<div class="container my-4" style="max-width: 1200px;">
+    <!-- Header -->
+    <div class="mb-4">
+        <h1 class="fw-bold gradient-text  mb-1">Global News</h1>
+        <p class="text-muted mb-0">Browse headlines, refine by category or search something specific.</p>
     </div>
+
+    <!-- Search bar -->
     <div class="input-group rounded-pill border bg-light mb-3 w-50 search-group">
         <span class="input-group-text bg-transparent border-0 rounded-start" id="search-addon">
             <i class="bi bi-search"></i>
         </span>
         <input type="text" class="form-control bg-transparent border-0 rounded-end" placeholder="Search..."
-            aria-label="Search" aria-describedby="search-addon">
+            [(ngModel)]="searchText" aria-label="Search" aria-describedby="search-addon">
     </div>
-    <button *ngFor="let cat of categories" type="button" class="btn btn-outline-secondary btn-sm rounded-pill me-2 mb-3"
-        [class.active]="selectedCategories.includes(cat)" (click)="toggleCategory(cat)">
-        {{ cat }}
-    </button>
-    <!-- Grid de cards -->
-    <div class="row">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" *ngFor="let card of cards">
-            <div class="card h-100 shadow-sm border-0">
-                <img src="https://picsum.photos/400/250" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <p class="card-subtitle small text-primary mb-2">Sports</p>
-                    <h5 class="card-title mb-1">Card title</h5>
-                    <p class="card-subtitle small text-secondary mb-2">Subtitle</p>
-                    <p class="card-text mb-2">Some quick example text to build on the card title and make up the bulk of the
-                        cards content.</p>
-                    <div class="d-flex justify-content-between align-items-baseline mb-3">
-                        <p class="text-muted small mb-0 fw-light">John Doe</p>
-                        <p class="text-muted small mb-0 fw-light">2h ago</p>
-                    </div>
 
+    <!-- Category filter chips and Create Article button -->
+    <div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
+        <div class="chips">
+            <button *ngFor="let cat of categories" type="button" class="btn btn-sm rounded-pill me-2 mb-2 filter-chip"
+                [class.active]="selectedCategories.includes(cat)" (click)="toggleCategory(cat)">
+                {{ cat }}
+            </button>
+        </div>
+        <button class="btn btn-primary mb-2 d-flex align-items-center gap-2" (click)="goToCreateArticle()">
+            <i class="bi bi-pencil-square"></i>
+            Create Article
+        </button>
+    </div>
+
+    <!-- Loading cards -->
+    <div *ngIf="loading" class="d-flex justify-content-center my-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <!-- Deleting Loading overlay -->
+    <div *ngIf="deletingLoading"
+        class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-dark bg-opacity-50"
+        style="z-index: 1050;">
+        <div class="spinner-grow text-primary" role="status" style="width: 3rem; height: 3rem;">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+
+    <!-- Not found articles -->
+    <div *ngIf="!loading && (articleList() | textFilter:searchText | categoryFilter:selectedCategories).length === 0"
+        class="text-center text-muted py-5">
+        <i class="bi bi-search fs-2 mb-2 d-block"></i>
+        <p class="mb-0">No articles found matching your filters.</p>
+    </div>
+
+    <!-- Cards grid -->
+    <div class="row" *ngIf="!loading">
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4"
+            *ngFor="let article of articleList() | textFilter:searchText | categoryFilter:selectedCategories">
+            <div class="card h-100 shadow-sm border-0" [routerLink]="['/articles', article.id]"
+                style="cursor: pointer;">
+                <img class="card-img-top"
+                    [src]="article.thumbnail_image ? 'data:' + article.thumbnail_media_type + ';base64,' + article.thumbnail_image : 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=60'"
+                    [alt]="article.title" />
+                <div class="card-body">
+                    <p class="card-subtitle small text-primary mb-2">{{ article.category }}</p>
+                    <h5 class="card-title mb-1 title-truncate">{{ article.title }}</h5>
+                    <p class="card-subtitle small text-secondary mb-2 text-truncate">{{ article.subtitle }}</p>
+                    <p class="card-text mb-2 flex-grow-1" [innerHTML]="article.abstract"></p>
+                    <p class="text-muted small mb-0 fw-light mb-3">Updated {{ article.update_date | date:'short' }}.
+                    </p>
                     <div class="d-flex justify-content-start gap-2">
-                        <button class="btn btn-outline-primary btn-sm">
+                        <button class="btn btn-outline-primary custom-edit"
+                            (click)="goToEditArticle(article.id); $event.stopPropagation();">
                             <i class="bi bi-pencil-fill me-1"></i> Edit
                         </button>
-                        <button class="btn btn-outline-danger btn-sm">
-                            <i class="bi bi-trash-fill me-1"></i> Delete
+                        <button class="btn btn-outline-danger custom-delete" data-bs-toggle="modal"
+                            data-bs-target="#deleteModal"
+                            (click)="showDeleteConfirmation(article); $event.stopPropagation();">
+                            <i class="bi bi-trash3-fill me-1"></i> Delete
                         </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
+
+
+</div>
+
+<!-- Modal Confirmation Delete -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteModalLabel">Confirm delete</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to <strong>remove this article</strong>?</p>
+                <ul class="list-unstyled mb-0">
+                    <li><strong>Title:</strong> {{ selectedArticle.title }}</li>
+                    <li><strong>Subtitle:</strong> {{ selectedArticle.subtitle }}</li>
+                    <li><strong>Abstract: </strong> <em [innerHTML]="selectedArticle.abstract">{{
+                            selectedArticle.abstract || '(no content)' }}</em></li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> <i
+                        class="bi bi-x-circle me-1"></i> Cancel
+                </button>
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
+                    (click)="deleteArticle(selectedArticle)">
+                    <i class="bi bi-trash3-fill me-1"></i>Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <!-- <div class="alert alert-success d-flex align-items-center p-2 fs-6 fade position-fixed top-0 end-0 p-3" style="z-index: 1100;"
+        role="alert">
+        <i class="bi bi-check-circle-fill flex-shrink-0 me-1"></i>
+        <div>
+            {{toastMessage}}
+        </div>
+    </div> -->
+
+    
+
+</div>
+
+<div class="position-fixed bottom-0 start-50 translate-middle-x mb-3" style="z-index: 1100;">
+  <div class="toast border-0 fade shadow-lg"
+       [class.toast-success]="toastType === 'success'"
+       [class.toast-error]="toastType === 'error'"
+       [class.show]="showToast"
+       role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex align-items-center px-3 py-2">
+      <i class="bi me-2"
+         [class.bi-check-circle-fill]="toastType === 'success'"
+         [class.bi-x-circle-fill]="toastType === 'error'">
+      </i>
+      <div class="toast-body fw-medium">{{ toastMessage }}</div>
+    </div>
+  </div>
 </div>
