@@ -1,0 +1,88 @@
+<div class="article-edition-wrapper">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+
+        <div class="card article-form-card">
+          <div class="card-body">
+            
+            <h2 class="card-title text-center mb-4">
+              {{ isEditMode ? 'Edit Article' : 'Create New Article' }}
+            </h2>
+            <hr class="mb-4">
+
+            <form [formGroup]="articleForm" (ngSubmit)="onSubmit()" novalidate>
+              
+              <div class="mb-3">
+                <label for="title" class="form-label">Title <span class="text-danger">*</span></label>
+                <input type="text" id="title" class="form-control" formControlName="title" 
+                       [class.is-invalid]="articleForm.get('title')?.invalid && articleForm.get('title')?.touched"
+                       placeholder="Enter article title">
+                <div *ngIf="articleForm.get('title')?.invalid && articleForm.get('title')?.touched" class="invalid-feedback">
+                  Title is required.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="subtitle" class="form-label">Subtitle</label>
+                <input type="text" id="subtitle" class="form-control" formControlName="subtitle"
+                       placeholder="Enter a brief subtitle">
+              </div>
+
+              <div class="mb-3">
+                <label for="category" class="form-label">Category <span class="text-danger">*</span></label>
+                <select id="category" class="form-select" formControlName="category"
+                        [class.is-invalid]="articleForm.get('category')?.invalid && articleForm.get('category')?.touched">
+                  <option [ngValue]="null" disabled>Select a category</option>
+                  <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+                </select>
+                <div *ngIf="articleForm.get('category')?.invalid && articleForm.get('category')?.touched" class="invalid-feedback">
+                  Category is required.
+                </div>
+              </div>
+              
+              <div class="mb-3">
+                <label for="abstract" class="form-label">Abstract <span class="text-danger">*</span></label>
+                <textarea id="abstract" class="form-control" formControlName="abstract" rows="3"
+                          [class.is-invalid]="articleForm.get('abstract')?.invalid && articleForm.get('abstract')?.touched"
+                          placeholder="Provide a concise summary of the article"></textarea>
+                <div *ngIf="articleForm.get('abstract')?.invalid && articleForm.get('abstract')?.touched" class="invalid-feedback">
+                  Abstract is required.
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="body" class="form-label">Body (HTML supported)</label>
+                <textarea id="body" class="form-control" formControlName="body" rows="10"
+                          placeholder="Write the full content of your article here. HTML tags are supported for formatting."></textarea>
+                <div class="form-text">You can use HTML tags for rich text formatting.</div>
+              </div>
+              
+              <div class="mb-4">
+                <label for="image" class="form-label">Article Image</label>
+                <input type="file" id="image" class="form-control image-upload-input" accept="image/png, image/jpeg" (change)="fileChangeEvent($event)">
+                
+                <div *ngIf="cardImageBase64" class="image-preview-container mt-3">
+                  <p class="text-muted mb-2">Image Preview:</p>
+                  <img [src]="cardImageBase64" class="img-fluid rounded article-image-preview" alt="Image preview">
+                </div>
+              </div>
+
+              <div *ngIf="feedback" class="alert" [ngClass]="{'alert-success': feedback.type === 'success', 'alert-danger': feedback.type === 'error'}">
+                {{ feedback.message }}
+              </div>
+              
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end pt-3">
+                <button type="button" class="btn btn-secondary me-md-2" (click)="goBack()">
+                  Cancel / Back
+                </button>
+                <button type="submit" class="btn btn-primary" [disabled]="articleForm.invalid">
+                  {{ isEditMode ? 'Update Article' : 'Create Article' }}
+                </button>
+              </div>
+
+            </form>
+          </div> </div> </div>
+    </div>
+  </div>
+</div>
