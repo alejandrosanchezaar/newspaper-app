@@ -1,7 +1,7 @@
 <div class="container my-4" style="max-width: 1200px;">
     <!-- Header -->
     <div class="mb-4">
-        <h1 class="fw-bold gradient-text  mb-1">Global News</h1>
+        <h1 class="fw-bold gradient-text mb-1">Global News</h1>
         <p class="text-muted mb-0">Browse headlines, refine by category or search something specific.</p>
     </div>
 
@@ -16,7 +16,7 @@
         </div>
 
         <!-- Mobile style -->
-        <button class="btn btn-primary d-md-none d-flex align-items-center gap-1 flex-shrink-0"
+        <button *ngIf="loggedIn" class="btn btn-primary d-md-none d-flex align-items-center gap-1 flex-shrink-0"
             (click)="goToCreateArticle()">
             <i class="bi bi-pencil-square"></i>
             <span>Create</span>
@@ -31,7 +31,7 @@
                 {{ cat }}
             </button>
         </div>
-        <button class="btn btn-primary d-none d-md-flex align-items-center gap-2 flex-shrink-0"
+        <button *ngIf="loggedIn" class="btn btn-primary d-none d-md-flex align-items-center gap-2 flex-shrink-0"
             (click)="goToCreateArticle()">
             <i class="bi bi-pencil-square"></i>
             Create Article
@@ -77,7 +77,7 @@
                     <p class="card-text mb-2 flex-grow-1" [innerHTML]="article.abstract"></p>
                     <p class="text-muted small mb-0 fw-light mb-3">Updated {{ article.update_date | date:'short' }}.
                     </p>
-                    <div class="d-flex justify-content-start gap-2">
+                    <div *ngIf="loggedIn" class="d-flex justify-content-start gap-2">
                         <button class="btn btn-outline-primary custom-edit"
                             (click)="goToEditArticle(article.id); $event.stopPropagation();">
                             <i class="bi bi-pencil-fill me-1"></i> Edit

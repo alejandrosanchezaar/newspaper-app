@@ -1,1 +1,49 @@
-<p>login works!</p>
+<div class="container mt-5 d-flex flex-column align-items-center">
+  <!-- Card de login -->
+  <div class="card p-4 shadow-sm card-soft-border" style="max-width: 380px; width: 100%;">
+    <h1 class="card-title fw-bold gradient-text mb-2 text-center">Log in</h1>
+    <p class="text-center text-secondary mb-3">Enter your credentials to create, edit or remove articles.</p>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" class="form-control" formControlName="username" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label text-sm">Password</label>
+        <input type="password" class="form-control" formControlName="password" />
+      </div>
+
+      <div class="d-flex justify-content-end align-items-center gap-1 mb-3">
+        <input type="checkbox" id="remember" formControlName="remember" class="form-check-input m-0">
+        <label class="text-secondary small mb-0" for="remember">Remember me</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="form.invalid">
+        Log in
+      </button>
+    </form>
+  </div>
+
+  <!-- Card de "Go back to home" -->
+  <div class="card p-3 shadow-sm card-soft-border mt-3" style="max-width: 380px; width: 100%;">
+    <div class="text-center">
+      <span class="small">Don't want to log in?</span>
+      <a routerLink="/" class="fw-bold ms-1 text-primary text-decoration-none">Go back to home</a>
+    </div>
+  </div>
+</div>
+
+<div class="position-fixed start-50 translate-middle-x mt-5" style="z-index: 1100;">
+    <div class="toast border-0 fade shadow-lg" [class.toast-success]="toastType === 'success'"
+        [class.toast-error]="toastType === 'error'" [class.show]="showToast" role="alert" aria-live="assertive"
+        aria-atomic="true">
+        <div class="d-flex align-items-center px-3 py-2">
+            <i class="bi me-2" [class.bi-check-circle-fill]="toastType === 'success'"
+                [class.bi-x-circle-fill]="toastType === 'error'">
+            </i>
+            <div class="toast-body fw-medium">{{ toastMessage }}</div>
+        </div>
+    </div>
+</div>
