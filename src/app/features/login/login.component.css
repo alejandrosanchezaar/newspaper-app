@@ -1,85 +1,39 @@
-.login-container {
-  max-width: 380px;
-  margin: 5rem auto;
-  padding: 2rem;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  background: #fff;
+.card-soft-border {
+  border: 1px solid #e0e0e0;
+}
 
-  h2 {
-    margin-bottom: 1.5rem;
-    text-align: center;
-    font-size: 1.6rem;
-    color: #1c1c1c;
-  }
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(90deg, #0d1b2a, #1b263b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
 
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+/* Toast notifications */
+.toast-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  min-width: 300px;
+  border-radius: 10px;
+}
 
-  label {
-    display: flex;
-    flex-direction: column;
-    font-weight: 500;
-    color: #333;
-    font-size: 0.95rem;
-  }
+.toast-error {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  min-width: 300px;
+  border-radius: 10px;
+}
 
-  input[type='text'],
-  input[type='password'] {
-    width: 100%;
-    padding: 0.6rem 0.75rem;
-    margin-top: 0.4rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
+.toast-success i,
+.toast-error i,
+.toast-success .toast-body,
+.toast-error .toast-body {
+  color: white;
+}
 
-    &:focus {
-      outline: none;
-      border-color: #0b5fff;
-      box-shadow: 0 0 0 2px rgba(11, 95, 255, 0.2);
-    }
-  }
-
-  .remember {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.9rem;
-    color: #444;
-    margin-top: 0.25rem;
-  }
-
-  button {
-    background: #0b5fff;
-    color: #fff;
-    border: none;
-    padding: 0.7rem;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1rem;
-    margin-top: 0.5rem;
-    transition: background 0.2s ease;
-
-    &:hover {
-      background: #0045d1;
-    }
-
-    &:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-  }
-
-  .error {
-    color: red;
-    text-align: center;
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-  }
+.toast-success .toast-body,
+.toast-error .toast-body {
+  padding: 0;
 }

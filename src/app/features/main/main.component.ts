@@ -8,6 +8,7 @@ import { TextFilterPipe } from '@/shared/pipes/text-filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
+import { LoginService } from '@/core/services/login.service';
 
 @Component({
   selector: 'app-main',
@@ -26,13 +27,19 @@ export class MainComponent {
   toastType: 'success' | 'error' = 'success';
   showToast = false;
   toastMessage: string = '';
+  loggedIn: boolean = false;
 
 
-  constructor(private newsService: NewsService, private router: Router) { }
+  constructor(private newsService: NewsService, private router: Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.getArticles();
     this.selectedArticle = createEmptyArticle();
+    this.refreshLoginStatus();
+  }
+
+  private refreshLoginStatus(): void {
+    this.loggedIn = this.loginService.isLogged();
   }
 
   private getArticles(): void {

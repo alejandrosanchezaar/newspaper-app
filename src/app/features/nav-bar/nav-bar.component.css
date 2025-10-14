@@ -1,0 +1,39 @@
+.site-header {
+    background: #fff;
+    border-bottom: 1px solid #e6e6e6;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  /* 3 columnas: izquierda (brand), centro (nav), derecha (acciones) */
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0.75rem 1rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .brand-logo {
+    height: 48px;     /* antes 36px */
+    width: auto;
+    display: block;
+    object-fit: contain;
+  }
+  
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  
+  .brand-text {
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
