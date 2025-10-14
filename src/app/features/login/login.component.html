@@ -1,1 +1,25 @@
-<p>login works!</p>
+<div class="login-container">
+  <h2>Log in</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label>
+      Username:
+      <input type="text" formControlName="username" />
+    </label>
+
+    <label>
+      Password:
+      <input type="password" formControlName="password" />
+    </label>
+
+    <label class="remember">
+      <input type="checkbox" formControlName="remember" />
+      Remember me
+    </label>
+
+    <button type="submit" [disabled]="form.invalid">Login</button>
+
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </form>
+</div>
+
