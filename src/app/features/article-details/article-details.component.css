@@ -1,0 +1,146 @@
+/* Palette di colori coerente con il resto del progetto */
+:host {
+  --primary-color: #4a90e2;
+  --secondary-color: #6c757d;
+  --background-color: #f4f6f9;
+  --card-background: #ffffff;
+  --text-color: #333;
+  --border-color: #ced4da;
+  --success-color: #28a745;
+  --error-color: #dc3545;
+  --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+:host {
+  display: block;
+  background-color: var(--background-color);
+  padding: 40px 15px;
+}
+
+/* Card principale per contenere l'articolo */
+.article-details-container {
+  background-color: var(--card-background);
+  border-radius: 12px;
+  padding: 30px 40px;
+  box-shadow: var(--box-shadow);
+  border: 1px solid #e9ecef;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Titolo articolo */
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Data aggiornamento */
+.update-date {
+  font-size: 0.85rem;
+  color: var(--secondary-color);
+  text-align: center;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+/* Categoria articolo */
+.category {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--secondary-color);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Sottotitolo */
+h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 15px;
+}
+
+/* Abstract */
+.abstract {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+/* Corpo articolo */
+.body {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin-bottom: 30px;
+}
+
+/* Immagine articolo */
+.article-image {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.article-image img {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 12px;
+  border: 2px solid #e9ecef;
+  object-fit: cover;
+  box-shadow: var(--box-shadow);
+}
+
+/* Pulsante "Go Back" */
+button.btn-secondary {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+}
+
+button.btn-secondary:hover {
+  background-color: var(--primary-color);
+}
+
+/* Loading e messaggi di errore */
+.loading,
+.error-message {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin-top: 30px;
+}
+
+/* Toast notifications (coerente con il CSS già presente) */
+.toast-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  min-width: 300px;
+  border-radius: 10px;
+}
+
+.toast-error {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  min-width: 300px;
+  border-radius: 10px;
+}
+
+.toast-success i,
+.toast-error i,
+.toast-success .toast-body,
+.toast-error .toast-body {
+  color: white;
+}
+
+.toast-success .toast-body,
+.toast-error .toast-body {
+  padding: 0;
+}

@@ -1,0 +1,104 @@
+/* Utilizziamo le variabili CSS per gestire facilmente la palette di colori */
+:host {
+  --primary-color: #4a90e2; /* Un blu moderno e accessibile */
+  --secondary-color: #6c757d;
+  --background-color: #f4f6f9; /* Sfondo leggermente grigio per far risaltare il form */
+  --card-background: #ffffff;
+  --text-color: #333;
+  --border-color: #ced4da;
+  --success-color: #28a745;
+  --error-color: #dc3545;
+  --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Applichiamo lo sfondo a tutta l'area del componente per un look uniforme */
+:host {
+  display: block;
+  background-color: var(--background-color);
+  padding: 40px 15px; /* Aggiunge spazio sopra e sotto */
+}
+
+/* Stile "Card" per il form, che lo fa sembrare sollevato dalla pagina */
+form {
+  background-color: var(--card-background);
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+  border: 1px solid #e9ecef;
+}
+
+/* Titolo del form */
+h2 {
+  color: var(--text-color);
+  font-weight: 600;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* Etichette (label) dei campi */
+.form-label {
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+/* Stile per tutti i campi di input, textarea e select */
+.form-control, .form-select {
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2); /* Ombra esterna sul focus */
+  outline: none;
+}
+
+/* Stile specifico per l'input di tipo file, per renderlo più gradevole */
+input[type="file"] {
+  border: 2px dashed var(--border-color);
+  background-color: var(--background-color);
+  cursor: pointer;
+}
+
+input[type="file"]:hover {
+  border-color: var(--primary-color);
+}
+
+/* Anteprima dell'immagine */
+.article-image-preview {
+  max-height: 250px;
+  border-radius: 8px;
+  border: 2px solid #e9ecef;
+  object-fit: cover;
+  box-shadow: var(--box-shadow);
+}
+
+/* Toast notifications */
+.toast-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  min-width: 300px;
+  border-radius: 10px;
+}
+
+.toast-error {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  min-width: 300px;
+  border-radius: 10px;
+}
+
+.toast-success i,
+.toast-error i,
+.toast-success .toast-body,
+.toast-error .toast-body {
+  color: white;
+}
+
+.toast-success .toast-body,
+.toast-error .toast-body {
+  padding: 0;
+}
