@@ -15,7 +15,8 @@
 :host {
   display: block;
   background-color: var(--background-color);
-  padding: 40px 15px; /* Aggiunge spazio sopra e sotto */
+   padding: 40px 15px;
+  min-height: 100vh; 
 }
 
 /* Stile "Card" per il form, che lo fa sembrare sollevato dalla pagina */

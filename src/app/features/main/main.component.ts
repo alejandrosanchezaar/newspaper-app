@@ -47,10 +47,9 @@ export class MainComponent {
     this.newsService.getArticles().subscribe({
       next: (articles) => { this.articleList.set(articles); console.log(articles); this.loading = false; },
       error: (err) => {
-        console.error('Error fetching articles:', err);
-        this.toastMessage = 'Error fetching articles. Please try again later.';
-        this.showToast = true;
         this.loading = false;
+        this.displayToast('error', 'Error fetching articles. Please try again later.');
+        console.error('Error:', err);
       }
     });
   }
