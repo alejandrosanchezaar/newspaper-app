@@ -1,0 +1,50 @@
+<header class="site-header" role="banner">
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <div class="container" style="max-width: 1200px;">
+            <!-- Logo -->
+            <a class="navbar-brand d-flex align-items-center" routerLink="/" aria-label="Home">
+                <img src="/img/newspaper-logo-full.svg" alt="Newspaper logo" class="brand-logo me-2" />
+                <span class="brand-text fw-bold">Newspaper</span>
+            </a>
+            <!-- Login content -->
+            <button *ngIf="!isLogged()" class="btn btn-primary" (click)="login()">Log in</button>
+
+            <!-- Logout content (collapsable mobile) -->
+            <ng-container *ngIf="isLogged()">
+                <!-- Toggler mobile -->
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarAuth" aria-controls="navbarAuth" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="bi bi-list fs-3"></i>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarAuth">
+                    <div class="d-flex align-items-center gap-2 mt-2 mt-md-0">
+                        <span class="text-muted me-2">Hello 👋🏻, {{ getUserName() }}</span>
+                        <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                            Log out
+                        </button>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </nav>
+</header>
+
+<!-- Modal Confirmation Logout -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="logoutModalLabel">Exit Newspaper</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>{{getUserName()}}, do you really want to <strong>log out</strong>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="logout()">Log out</button>
+            </div>
+        </div>
+    </div>
+</div>

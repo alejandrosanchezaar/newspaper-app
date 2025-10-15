@@ -1,0 +1,39 @@
+.card-soft-border {
+  border: 1px solid #e0e0e0;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(90deg, #0d1b2a, #1b263b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Toast notifications */
+.toast-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  min-width: 300px;
+  border-radius: 10px;
+}
+
+.toast-error {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  min-width: 300px;
+  border-radius: 10px;
+}
+
+.toast-success i,
+.toast-error i,
+.toast-success .toast-body,
+.toast-error .toast-body {
+  color: white;
+}
+
+.toast-success .toast-body,
+.toast-error .toast-body {
+  padding: 0;
+}

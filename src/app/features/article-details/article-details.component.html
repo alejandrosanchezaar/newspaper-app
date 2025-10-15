@@ -1,0 +1,38 @@
+<div class="article-details-container" *ngIf="!isLoading && article;">
+
+  <!-- Data aggiornamento -->
+  <p class="update-date" *ngIf="article?.update_date">
+    Last updated: {{ article.update_date | date:'medium' }}
+  </p>
+  <!-- Titolo e categoria -->
+  <h1>{{ article.title }}</h1>
+  <p class="category">{{ article.category }}</p>
+
+  <!-- Immagine (se presente) -->
+  <div class="article-image">
+    <img [src]="imageUrl || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=60'" alt="Article Image" />
+  </div>
+
+  <!-- Sottotitolo e abstract -->
+  <h2 *ngIf="article?.subtitle">{{ article.subtitle }}</h2>
+  <p class="abstract" *ngIf="article?.abstract" [innerHTML]="article.abstract"></p>
+
+  <!-- Corpo articolo -->
+  <div class="body" [innerHTML]="article.body"></div>
+
+  <!-- Pulsante indietro -->
+  <button class="btn btn-outline-secondary" (click)="goBack()">Go Back</button>
+
+</div>
+
+  <div *ngIf="!isLoading && errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+<div *ngIf="isLoading"
+        class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-dark bg-opacity-50"
+        style="z-index: 1050;">
+        <div class="spinner-grow text-primary" role="status" style="width: 3rem; height: 3rem;">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Newspaper logo">
+  <title>Newspaper Logo</title>
+  <!-- Icon background -->
+  <rect x="32" y="32" width="448" height="448" rx="96" fill="#0b5fff"/>
+  <!-- N shape -->
+  <g fill="#ffffff">
+    <rect x="144" y="96" width="64" height="320" rx="12"/>
+    <rect x="304" y="96" width="64" height="320" rx="12"/>
+    <polygon points="208,96 272,96 304,416 240,416"/>
+  </g>
+</svg>
